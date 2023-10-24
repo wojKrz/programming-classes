@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_main"
+  app:startDestination="@id/primaryFragment">
+
+  <fragment
+    android:id="@+id/primaryFragment"
+    android:name="edu.mobileprogrammingclasses.PrimaryFragment"
+    tools:layout="@layout/fragment_primary">
+    <action
+      android:id="@+id/actionNavigateToSecondFragment"
+      app:destination="@id/secondaryFragment" >
+      <argument
+        android:name="myArgument"
+        app:argType="string"
+        android:defaultValue="hello"
+        app:nullable="false" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/secondaryFragment"
+    android:name="edu.mobileprogrammingclasses.SecondaryFragment"
+    tools:layout="@layout/fragment_secondary">
+    <argument
+      android:name="myArgument"
+      app:argType="string"
+      android:defaultValue="hello"
+      app:nullable="false" />
+  </fragment>
+
+</navigation>
