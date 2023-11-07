@@ -20,8 +20,9 @@ class PrimaryFragment : Fragment() {
     binding.myButton.setOnClickListener {
       val argument = binding.textInput.text.toString()
 
+
       findNavController().navigate(
-        PrimaryFragmentDirections.actionNavigateToSecondFragment(argument)
+        PrimaryFragmentDirections.actionNavigateToSecondFragment()
       )
     }
 

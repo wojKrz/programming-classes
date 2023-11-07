@@ -25,7 +25,6 @@ class SecondaryFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val argument = navArgs<SecondaryFragmentArgs>().value.myArgument
-    binding.secondText.text = argument
+    binding.secondText.text = navArgs<SecondaryFragmentArgs>().value.myArgument
   }
 }
