@@ -7,6 +7,15 @@
   app:startDestination="@id/homeScreen">
 
   <fragment
+    android:id="@+id/secondScreen"
+    android:name="edu.mobileprogrammingclasses.SecondFragment"
+    tools:layout="@layout/fragment_second">
+    <argument
+      android:name="text"
+      app:argType="string" />
+  </fragment>
+
+  <fragment
     android:id="@+id/homeScreen"
     android:name="edu.mobileprogrammingclasses.StartFragment"
     tools:layout="@layout/fragment_start">
@@ -14,16 +23,5 @@
       android:id="@+id/actionNavigateToSecondScreen"
       app:destination="@id/secondScreen" />
   </fragment>
-
-  <fragment
-    android:id="@+id/secondScreen"
-    android:name="edu.mobileprogrammingclasses.SecondFragment"
-    tools:layout="@layout/fragment_second" >
-
-  </fragment>
-
-  <action
-    android:id="@+id/actionNavigateToSecondScreenFromAnywhere"
-    app:destination="@id/secondScreen"  />
 
 </navigation>

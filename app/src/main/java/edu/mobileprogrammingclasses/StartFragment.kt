@@ -10,17 +10,23 @@ import edu.mobileprogrammingclasses.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
 
+  private lateinit var binding: FragmentStartBinding
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val binding = FragmentStartBinding.inflate(inflater, container, false)
+    binding = FragmentStartBinding.inflate(inflater, container, false)
 
-    binding.myButton.setOnClickListener {
-      findNavController().navigate(R.id.actionNavigateToSecondScreen)
-    }
+    binding.myButton.setOnClickListener { navigateToNextFragmentWithTextInputContent() }
 
     return binding.root
+  }
+
+  private fun navigateToNextFragmentWithTextInputContent() {
+    val text = binding.testInput.text?.toString() ?: ""
+
+    findNavController().navigate(StartFragmentDirections.actionNavigateToSecondScreen(text))
   }
 }
