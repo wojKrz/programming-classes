@@ -5,10 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/testInput"
+    <TextView
+      android:id="@+id/responseText"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:visibility="gone" />
+
+    <ProgressBar
+      android:id="@+id/progressIndicator"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:visibility="gone"
+      android:layout_gravity="center" />
 
     <Button
       android:id="@+id/myButton"
