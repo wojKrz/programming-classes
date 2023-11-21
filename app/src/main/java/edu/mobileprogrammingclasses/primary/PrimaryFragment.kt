@@ -1,17 +1,21 @@
-package edu.mobileprogrammingclasses
+package edu.mobileprogrammingclasses.primary
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import edu.mobileprogrammingclasses.PrimaryViewState.Data
-import edu.mobileprogrammingclasses.PrimaryViewState.IsLoading
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import edu.mobileprogrammingclasses.primary.PrimaryViewState.Data
+import edu.mobileprogrammingclasses.primary.PrimaryViewState.IsLoading
 import edu.mobileprogrammingclasses.databinding.FragmentPrimaryBinding
 
 class PrimaryFragment : Fragment() {
 
+  private val todosAdapter = TodoListAdapter(emptyList())
   lateinit var binding: FragmentPrimaryBinding
 
   private val viewModel: PrimaryViewModel by viewModels()
@@ -23,24 +27,28 @@ class PrimaryFragment : Fragment() {
   ): View {
     binding = FragmentPrimaryBinding.inflate(inflater, container, false)
 
-    binding.myButton.setOnClickListener {
-      viewModel.makeNetworkCall()
-    }
-
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    val todosListLayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+    binding.todosList.apply {
+      adapter = todosAdapter
+      layoutManager = todosListLayoutManager
+    }
+
     viewModel.resultLiveData.observe(viewLifecycleOwner) {
-      when(it) {
+      when (it) {
         is Data -> {
-          binding.helloWorldText.text = it.response
-          binding.progressCircular.visibility = View.GONE
+          todosAdapter.todos = it.todos
+          todosAdapter.notifyDataSetChanged()
         }
-        IsLoading -> binding.progressCircular.visibility = View.VISIBLE
+        IsLoading -> {}
       }
     }
+
+    viewModel.makeNetworkCall()
   }
 }

@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <TextView
-      android:id="@+id/helloWorldText"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/hello_world"
-      android:textSize="32sp" />
-
-
-    <ProgressBar
-      android:id="@+id/progressCircular"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="gone"
-      android:layout_gravity="center" />
-
-    <Button
-      android:id="@+id/myButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="My Button"
-      android:layout_gravity="bottom" />
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/todosList"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:listitem="@layout/item_todo"/>
   </FrameLayout>
 </layout>

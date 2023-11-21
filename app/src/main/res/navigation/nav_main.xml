@@ -8,7 +8,7 @@
 
   <fragment
     android:id="@+id/primaryFragment"
-    android:name="edu.mobileprogrammingclasses.PrimaryFragment"
+    android:name="edu.mobileprogrammingclasses.primary.PrimaryFragment"
     tools:layout="@layout/fragment_primary">
     <action
       android:id="@+id/actionNavigateToSecondFragment"
