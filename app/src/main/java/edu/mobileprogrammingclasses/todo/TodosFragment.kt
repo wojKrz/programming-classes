@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import edu.mobileprogrammingclasses.databinding.FragmentStartBinding
 import edu.mobileprogrammingclasses.todo.TodosViewState.Loading
 import edu.mobileprogrammingclasses.todo.TodosViewState.Result
@@ -16,6 +18,8 @@ class TodosFragment : Fragment() {
 
   private val viewModel: TodosViewModel by viewModels()
 
+  private val todosAdapter = TodosListAdapter(emptyList())
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -23,27 +27,28 @@ class TodosFragment : Fragment() {
   ): View {
     binding = FragmentStartBinding.inflate(inflater, container, false)
 
-    binding.myButton.setOnClickListener { viewModel.makeNetworkCall() }
-
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    binding.todoList.apply {
+      adapter = todosAdapter
+      layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
+
     viewModel.responseLiveData.observe(viewLifecycleOwner) {
       when(it) {
         Loading -> {
-          binding.progressIndicator.visibility = View.VISIBLE
-          binding.responseText.visibility = View.GONE
-          binding.responseText.text = ""
         }
         is Result -> {
-          binding.progressIndicator.visibility = View.GONE
-          binding.responseText.visibility = View.VISIBLE
-          binding.responseText.text = it.response.toString()
+          todosAdapter.data = it.response
+          todosAdapter.notifyDataSetChanged()
         }
       }
     }
+
+    viewModel.makeNetworkCall()
   }
 }
