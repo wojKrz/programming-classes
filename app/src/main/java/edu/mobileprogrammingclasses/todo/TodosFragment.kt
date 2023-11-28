@@ -1,4 +1,4 @@
-package edu.mobileprogrammingclasses.start
+package edu.mobileprogrammingclasses.todo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import edu.mobileprogrammingclasses.databinding.FragmentStartBinding
-import edu.mobileprogrammingclasses.start.StartViewState.Loading
-import edu.mobileprogrammingclasses.start.StartViewState.Result
+import edu.mobileprogrammingclasses.todo.TodosViewState.Loading
+import edu.mobileprogrammingclasses.todo.TodosViewState.Result
 
-class StartFragment : Fragment() {
+class TodosFragment : Fragment() {
 
   private lateinit var binding: FragmentStartBinding
 
-  private val viewModel: StartViewModel by viewModels()
+  private val viewModel: TodosViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -41,7 +41,7 @@ class StartFragment : Fragment() {
         is Result -> {
           binding.progressIndicator.visibility = View.GONE
           binding.responseText.visibility = View.VISIBLE
-          binding.responseText.text = it.response
+          binding.responseText.text = it.response.toString()
         }
       }
     }

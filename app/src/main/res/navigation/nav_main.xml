@@ -17,7 +17,7 @@
 
   <fragment
     android:id="@+id/homeScreen"
-    android:name="edu.mobileprogrammingclasses.start.StartFragment"
+    android:name="edu.mobileprogrammingclasses.todo.TodosFragment"
     tools:layout="@layout/fragment_start">
     <action
       android:id="@+id/actionNavigateToSecondScreen"
