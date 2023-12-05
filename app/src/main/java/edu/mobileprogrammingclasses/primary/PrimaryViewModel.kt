@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import edu.mobileprogrammingclasses.MyApplication
+import edu.mobileprogrammingclasses.domain.todo.GetTodosListUsecase
+import edu.mobileprogrammingclasses.domain.todo.TodoMapper
+import edu.mobileprogrammingclasses.networking.todo.TodosApiService
 import edu.mobileprogrammingclasses.primary.PrimaryViewState.IsLoading
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -30,6 +32,12 @@ class PrimaryViewModel : ViewModel() {
     .addConverterFactory(GsonConverterFactory.create())
     .client(netClient)
     .build()
+  private val todosApi = retrofit.create(TodosApiService::class.java)
+
+  private val todosDao = MyApplication.database.todoDao()
+  private val todoMapper = TodoMapper()
+
+  private val getTodosListUsecase = GetTodosListUsecase(todosApi, todosDao, todoMapper)
 
   private val _resultLiveData = MutableLiveData<PrimaryViewState>()
   val resultLiveData: LiveData<PrimaryViewState> = _resultLiveData
@@ -37,23 +45,17 @@ class PrimaryViewModel : ViewModel() {
   fun makeNetworkCall() {
     Log.d("Component instances", this.toString())
 
-    val todosApi = retrofit.create(TodosApiService::class.java)
-
     _resultLiveData.value = IsLoading
 
-   viewModelScope.launch {
-
-      val netDeffered = async(Dispatchers.IO) {
-        todosApi.listTodos()
-      }
-
-      _resultLiveData.value = netDeffered.await()
+    viewModelScope.launch {
+      val result = async(Dispatchers.IO) { getTodosListUsecase.execute() }.await()
+      _resultLiveData.value = result
         .run(PrimaryViewState::Data)
     }
   }
 }
 
 sealed class PrimaryViewState {
-  data object IsLoading: PrimaryViewState()
+  data object IsLoading : PrimaryViewState()
   data class Data(val todos: List<Todo>) : PrimaryViewState()
 }

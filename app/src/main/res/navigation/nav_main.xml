@@ -6,17 +6,26 @@
   android:id="@+id/nav_main"
   app:startDestination="@id/primaryFragment">
 
+  <action
+    android:id="@+id/actionNavigateToWeclomeDialog"
+    app:destination="@id/welcomeDialog" />
+
+  <dialog
+    android:id="@+id/welcomeDialog"
+    android:name="edu.mobileprogrammingclasses.welcome.WelcomeDialog"
+    tools:layout="@layout/dialog_welcome" />
+
   <fragment
     android:id="@+id/primaryFragment"
     android:name="edu.mobileprogrammingclasses.primary.PrimaryFragment"
     tools:layout="@layout/fragment_primary">
     <action
       android:id="@+id/actionNavigateToSecondFragment"
-      app:destination="@id/secondaryFragment" >
+      app:destination="@id/secondaryFragment">
       <argument
         android:name="myArgument"
-        app:argType="string"
         android:defaultValue="hello"
+        app:argType="string"
         app:nullable="false" />
     </action>
   </fragment>
@@ -27,8 +36,8 @@
     tools:layout="@layout/fragment_secondary">
     <argument
       android:name="myArgument"
-      app:argType="string"
       android:defaultValue="hello"
+      app:argType="string"
       app:nullable="false" />
   </fragment>
 

@@ -51,6 +51,15 @@ dependencies {
   implementation("com.squareup.retrofit2:converter-gson:2.9.0")
   implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
+  implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+  val room_version = "2.6.1"
+
+  implementation("androidx.room:room-runtime:$room_version")
+  annotationProcessor("androidx.room:room-compiler:$room_version")
+
+  // To use Kotlin annotation processing tool (kapt)
+  kapt("androidx.room:room-compiler:$room_version")
 
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.1.5")

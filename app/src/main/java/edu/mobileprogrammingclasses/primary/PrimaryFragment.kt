@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.mobileprogrammingclasses.primary.PrimaryViewState.Data
 import edu.mobileprogrammingclasses.primary.PrimaryViewState.IsLoading
 import edu.mobileprogrammingclasses.databinding.FragmentPrimaryBinding
+import kotlinx.coroutines.launch
 
 class PrimaryFragment : Fragment() {
 

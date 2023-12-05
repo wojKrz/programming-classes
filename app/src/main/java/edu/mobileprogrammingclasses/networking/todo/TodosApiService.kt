@@ -1,6 +1,6 @@
-package edu.mobileprogrammingclasses.primary
+package edu.mobileprogrammingclasses.networking.todo
 
-import retrofit2.Call
+import edu.mobileprogrammingclasses.primary.Todo
 import retrofit2.http.GET
 
 interface TodosApiService {
