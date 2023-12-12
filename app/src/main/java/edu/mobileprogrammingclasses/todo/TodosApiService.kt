@@ -1,5 +1,6 @@
 package edu.mobileprogrammingclasses.todo
 
+import edu.mobileprogrammingclasses.data.Todo
 import retrofit2.http.GET
 
 interface TodosApiService {

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import edu.mobileprogrammingclasses.R
+import edu.mobileprogrammingclasses.data.Todo
 
 class TodosListAdapter(var data: List<Todo>) :
   RecyclerView.Adapter<TodosListAdapter.ViewHolder>() {

@@ -6,6 +6,15 @@
   android:id="@+id/nav_main"
   app:startDestination="@id/homeScreen">
 
+  <action
+    android:id="@+id/actionNavigateToWelcomeDialog"
+    app:destination="@id/welcomeDialog" />
+
+  <dialog
+    android:id="@+id/welcomeDialog"
+    android:name="edu.mobileprogrammingclasses.welcome.WelcomeDialog"
+    tools:layout="@layout/dialog_welcome" />
+
   <fragment
     android:id="@+id/secondScreen"
     android:name="edu.mobileprogrammingclasses.SecondFragment"

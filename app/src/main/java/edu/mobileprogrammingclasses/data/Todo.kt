@@ -1,4 +1,4 @@
-package edu.mobileprogrammingclasses.todo
+package edu.mobileprogrammingclasses.data
 
 data class Todo(
   val userId: Int,
