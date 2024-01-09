@@ -3,6 +3,7 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("androidx.navigation.safeargs.kotlin")
   id("kotlin-kapt")
+  id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -60,6 +61,9 @@ dependencies {
 
   // To use Kotlin annotation processing tool (kapt)
   kapt("androidx.room:room-compiler:$room_version")
+
+  implementation("com.google.dagger:hilt-android:2.50")
+  kapt("com.google.dagger:hilt-android-compiler:2.50")
 
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.1.5")

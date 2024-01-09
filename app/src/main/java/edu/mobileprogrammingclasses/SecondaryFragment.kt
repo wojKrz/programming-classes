@@ -7,11 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import edu.mobileprogrammingclasses.databinding.FragmentSecondaryBinding
+import edu.mobileprogrammingclasses.domain.todo.GetTodosListUsecase
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SecondaryFragment : Fragment() {
 
   private lateinit var binding: FragmentSecondaryBinding
+
+  @Inject
+  lateinit var todosListUsecase: GetTodosListUsecase
 
   override fun onCreateView(
     inflater: LayoutInflater,

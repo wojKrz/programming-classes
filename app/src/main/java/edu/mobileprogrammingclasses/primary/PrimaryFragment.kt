@@ -11,11 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
+import edu.mobileprogrammingclasses.R
 import edu.mobileprogrammingclasses.primary.PrimaryViewState.Data
 import edu.mobileprogrammingclasses.primary.PrimaryViewState.IsLoading
 import edu.mobileprogrammingclasses.databinding.FragmentPrimaryBinding
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class PrimaryFragment : Fragment() {
 
   private val todosAdapter = TodoListAdapter(emptyList())
@@ -36,6 +39,10 @@ class PrimaryFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    binding.navigateButton.setOnClickListener {
+      findNavController().navigate(R.id.actionNavigateToSecondFragment)
+    }
+
     val todosListLayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
     binding.todosList.apply {
       adapter = todosAdapter
@@ -45,9 +52,12 @@ class PrimaryFragment : Fragment() {
     viewModel.resultLiveData.observe(viewLifecycleOwner) {
       when (it) {
         is Data -> {
+          binding.firstText.text = resources.getString(R.string.formatted_string, it.secondString)
+
           todosAdapter.todos = it.todos
           todosAdapter.notifyDataSetChanged()
         }
+
         IsLoading -> {}
       }
     }
