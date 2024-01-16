@@ -1,5 +1,6 @@
 package edu.mobileprogrammingclasses.todo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import edu.mobileprogrammingclasses.R
 import edu.mobileprogrammingclasses.databinding.FragmentStartBinding
 import edu.mobileprogrammingclasses.todo.TodosViewState.Loading
 import edu.mobileprogrammingclasses.todo.TodosViewState.Result
+import edu.mobileprogrammingclasses.toggle.ToggleTodoService
 
 @AndroidEntryPoint
 class TodosFragment : Fragment() {
@@ -38,7 +40,8 @@ class TodosFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.navigationButton.setOnClickListener {
-      findNavController().navigate(R.id.actionNavigateToSecondScreen)
+//      findNavController().navigate(R.id.actionNavigateToSecondScreen)
+      requireActivity().startService(Intent(requireContext(), ToggleTodoService::class.java))
     }
 
     binding.todoList.apply {
@@ -47,9 +50,10 @@ class TodosFragment : Fragment() {
     }
 
     viewModel.responseLiveData.observe(viewLifecycleOwner) {
-      when(it) {
+      when (it) {
         Loading -> {
         }
+
         is Result -> {
           todosAdapter.data = it.response
           todosAdapter.notifyDataSetChanged()

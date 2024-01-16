@@ -13,4 +13,11 @@ abstract class TodoDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   abstract suspend fun insert(entities: List<TodoEntity>)
+
+  suspend fun saveTodoState(todoId: Int, syncState: SyncState) {
+
+  }
+
+
+  suspend fun getUnsyncedTodos(): List<TodoEntity> = emptyList()
 }
