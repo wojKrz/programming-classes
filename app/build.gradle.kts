@@ -3,6 +3,7 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("androidx.navigation.safeargs.kotlin")
   id("kotlin-kapt")
+  id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -56,6 +57,8 @@ dependencies {
   annotationProcessor("androidx.room:room-compiler:$room_version")
   kapt("androidx.room:room-compiler:$room_version")
 
+  implementation("com.google.dagger:hilt-android:2.50")
+  kapt("com.google.dagger:hilt-compiler:2.50")
 
   implementation("com.squareup.okhttp3:okhttp:4.11.0")
   implementation ("com.squareup.retrofit2:retrofit:2.9.0")

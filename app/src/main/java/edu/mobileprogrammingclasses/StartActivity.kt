@@ -13,6 +13,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.room.Room
+import dagger.hilt.android.AndroidEntryPoint
 import edu.mobileprogrammingclasses.databinding.ActivityStartBinding
 import edu.mobileprogrammingclasses.persistence.MyDatabase
 import kotlinx.coroutines.flow.first
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 val USER_HAS_SEEN_WELCOME = booleanPreferencesKey("userHasSeenWelcome")
 
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {

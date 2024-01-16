@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import edu.mobileprogrammingclasses.MyApplication
 import edu.mobileprogrammingclasses.data.GetTodosUsecase
 import edu.mobileprogrammingclasses.persistence.todo.TodoDao
@@ -17,25 +18,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class TodosViewModel : ViewModel() {
-  private val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(HttpLoggingInterceptor().apply { this.setLevel(HttpLoggingInterceptor.Level.BODY) })
-    .build()
-
-  private val retrofit = Retrofit.Builder()
-    .baseUrl("https://jsonplaceholder.typicode.com/")
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(okHttpClient)
-    .build()
-
-  private val todosApiService: TodosApiService = retrofit.create(TodosApiService::class.java)
-
-  private val todosDao: TodoDao = MyApplication.database.getTodosDao()
-
-  private val todosMapper: TodoMapper = TodoMapper()
-
-  private val getTodosUsecase = GetTodosUsecase(todosApiService, todosDao, todosMapper)
+@HiltViewModel
+class TodosViewModel @Inject constructor(
+  private val getTodosUsecase: GetTodosUsecase
+): ViewModel() {
 
   private val _responseLiveData = MutableLiveData<TodosViewState>()
   val responseLiveData: LiveData<TodosViewState> = _responseLiveData

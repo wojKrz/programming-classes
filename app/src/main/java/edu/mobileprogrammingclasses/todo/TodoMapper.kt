@@ -2,8 +2,11 @@ package edu.mobileprogrammingclasses.todo
 
 import edu.mobileprogrammingclasses.data.Todo
 import edu.mobileprogrammingclasses.persistence.todo.TodoEntity
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TodoMapper {
+@Singleton
+class TodoMapper @Inject constructor() {
 
   fun mapEntityToTodo(entity: TodoEntity): Todo = with(entity) {
     Todo(

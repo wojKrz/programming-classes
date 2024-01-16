@@ -5,8 +5,9 @@ import edu.mobileprogrammingclasses.persistence.todo.TodoDao
 import edu.mobileprogrammingclasses.todo.TodoMapper
 import edu.mobileprogrammingclasses.todo.TodosApiService
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class GetTodosUsecase(
+class GetTodosUsecase @Inject constructor(
   private val todosApiService: TodosApiService,
   private val todosDao: TodoDao,
   private val todosMapper: TodoMapper

@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
+import edu.mobileprogrammingclasses.R
 import edu.mobileprogrammingclasses.databinding.FragmentStartBinding
 import edu.mobileprogrammingclasses.todo.TodosViewState.Loading
 import edu.mobileprogrammingclasses.todo.TodosViewState.Result
 
+@AndroidEntryPoint
 class TodosFragment : Fragment() {
 
   private lateinit var binding: FragmentStartBinding
@@ -33,6 +36,10 @@ class TodosFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    binding.navigationButton.setOnClickListener {
+      findNavController().navigate(R.id.actionNavigateToSecondScreen)
+    }
 
     binding.todoList.apply {
       adapter = todosAdapter
