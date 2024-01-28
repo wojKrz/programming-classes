@@ -1,63 +1,45 @@
 package edu.mobileprogrammingclasses
 
+/**
+ * Every product has an id.
+ * Additionally, book has a number of pages, videogame has requirements and movie has a cast.
+ * Each product needs to be passed to the external library as an id and that additional property.
+ * Rewrite the code to make in null safe and utilise 'when' statement and sealed classes.
+ */
+
 fun main() {
 
-  val myCat = DomesticCat("Orange", "Mr Fluff")
+  val products = listOf(
+    Product(id = 1, type = PRODUCT_BOOK, numberOfPages = 300),
+    Product(id = 2, type = PRODUCT_MOVIE, cast = "actors and such"),
+    Product(id = 3, type = PRODUCT_VIDEOGAME, requirements = "Working computer")
+  )
 
-  val myTiger = Tiger("Tiger")
-
-  val myLion = Lion("Simba")
-
-  val allMyCats = listOf(myCat, myTiger)
-
-  val myModifiedCats = allMyCats.toMutableList().apply { add(myLion) }.toList()
-
-
-  println("${myTiger.color?.length ?: 0}")
-
-  allMyCats.forEach(Cat::saySomething)
-
-  myModifiedCats.forEach(Cat::saySomething)
-}
-
-interface CatsVoice {
-  val name: String
-
-  fun saySomething()
-}
-
-class Meow(override val name: String) : CatsVoice {
-
-  override fun saySomething() = println("Meow! I'm $name")
-}
-
-class Roar(override val name: String): CatsVoice {
-  override fun saySomething() = println("Roar! I'm $name")
-}
-
-abstract class Cat(
-  val color: String? = null,
-  override val name: String,
-  voice: CatsVoice
-): CatsVoice by voice {
-
-  val colorAndName: String = "$color $name"
-
-}
-
-class DomesticCat(color: String = "Black", name: String): Cat(color, name, Meow(name)) {
-  lateinit var eyesColor: String
-
-  fun assignCatsEyesColor() {
-    eyesColor = "Green"
-  }
-
-  fun exampleFunctionWithAnotherFunction(a: Int, func: (Int) -> String): String {
-    val anotherValue = func(a + 5)
-    return "Result $anotherValue"
+  products.forEach { product ->
+    if (product.type == PRODUCT_BOOK) {
+      handleBook(product.id, product.numberOfPages ?: 0)
+    } else if (product.type == PRODUCT_VIDEOGAME) {
+      handleVideogame(product.id, product.requirements.orEmpty())
+    } else if (product.type == PRODUCT_MOVIE) {
+      handleMovie(product.id, product.cast.orEmpty())
+    }
   }
 }
 
-class Tiger(name: String): Cat(null, name, Roar(name))
+fun handleBook(id: Int, pages: Int) {}
+fun handleVideogame(id: Int, requirements: String) {}
 
-class Lion(name: String): Cat("Yellow", name, Roar(name))
+fun handleMovie(id: Int, cast: String) {}
+
+
+val PRODUCT_BOOK = 0
+val PRODUCT_VIDEOGAME = 1
+val PRODUCT_MOVIE = 2
+
+class Product(
+  val id: Int,
+  val type: Int,
+  val cast: String? = null,
+  val requirements: String? = null,
+  val numberOfPages: Int? = null
+)
